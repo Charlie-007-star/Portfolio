@@ -20,6 +20,7 @@
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
         <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
     </head>
@@ -94,7 +95,7 @@
                         <div class="about-content">
                             <div class="section-header text-left">
                                 <p>Learn About Me</p>
-                                <h2>1 Year of Self Learner</h2>
+                                <h2> Self Learner</h2>
                             </div>
                             <div class="about-text">
                                 <p>
@@ -384,7 +385,7 @@
         <!-- Portfolio End -->
         
         <!-- Interests -->
-        <div class="experience" id="interests">
+        <div class="experience" id="interests" style="padding-top: 13rem;">
             <div class="container">
                 <header class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
                     <p>My Hobbies</p>
@@ -600,39 +601,35 @@
         
         
         <!-- Contact Start -->
-        <div class="contact wow fadeInUp" data-wow-delay="0.1s" id="contact">
+        <div class="contact wow fadeInUp" data-wow-delay="0.1s" id="contact" style="padding-top: 3rem;">
             <div class="container-fluid">
                 <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-8">
-                            <div class="contact-form">
-                                <div id="success"></div>
-                                <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                                    <h2>Contact me</h2>
-                                    <div class="control-group">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                        <p class="help-block"></p>
-                                    </div>
-                                    <div class="control-group">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                        <p class="help-block"></p>
-                                    </div>
-                                    <div class="control-group">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                        <p class="help-block"></p>
-                                    </div>
-                                    <div class="control-group">
-                                        <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                        <p class="help-block"></p>
-                                    </div>
-                                    <div>
-                                        <button class="btn" type="submit" id="sendMessageButton">Send Message</button>
-                                    </div>
-                                </form>
-                            </div>
+                    <form name="sentMessage" id="gform" novalidate="novalidate" >
+                        <h2>Contact me</h2>
+                        <div class="control-group">
+                            <label style="color: aliceblue;" for="inputname">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" maxlength="20" placeholder="Enter Your Name" autocomplete="off" oninput="this.value=this.value.replace(/[^A-Za-z ]|^ /g,'')" >
+                            <p style="color: aliceblue; padding-top: 1rem;" id="name-error"></p>
                         </div>
-                    </div>
+                        <div class="control-group">
+                            <label  style="color: aliceblue;" for="inputemail">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" maxlength="20" placeholder="Enter Your Email" autocomplete="off" >
+                            <p style="color: aliceblue; padding-top: 1rem;" id="email-error"></p>
+                        </div>
+                        <div class="control-group">
+                            <label  style="color: aliceblue;" for="inputnumber">Mobile</label>
+                            <input type="tel" class="form-control" id="mobile" name="mobile" maxlength="10" placeholder="Enter your number" autocomplete="off" oninput="this.value=this.value.replace(/[^0-9 ]|^ /g,'')" >
+                            <p style="color: aliceblue; padding-top: 1rem;" id="mobile-error"></p>
+                        </div>
+                        <div class="control-group">
+                            <label  style="color: aliceblue;" for="inputmessage">Message</label>
+                            <textarea class="form-control" id="message" name="message" maxlength="30" placeholder="" autocomplete="off"></textarea>
+                            <p style="color: aliceblue; padding-top: 1rem;" id="message-error"></p>
+                        </div>
+                        <div>
+                            <button class="btn" type="submit" id="submit-btn">Send Message</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -693,5 +690,35 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+
+                       
+        <script>
+            $("#gform").submit((e)=>{
+               e.preventDefault()
+               if(formvalid.username && formvalid.mobilename && formvalid.messagename && formvalid.emailname){
+               $.ajax({
+                   url:"https://script.google.com/macros/s/AKfycbz5JyTtneRZRx9w6-7ZkCJ40RxCLllItIPuvTL7JA/exec",
+                   data:$("#gform").serialize(),
+                   method:"post",
+                   success:function (response){
+                       alert("Form submitted successfully")
+                       window.location.reload()
+                       //window.location.href="https://google.com"
+                   },
+                   error:function (err){
+                       alert("Something Error")
+         
+                   }
+               })
+             }
+             else{
+               validname();
+               validmessage();
+               validemail();
+               validmobile();
+             }
+           })
+         </script>
+         
     </body>
 </html>
