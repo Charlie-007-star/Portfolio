@@ -1589,3 +1589,18 @@ a:focus {
         padding: 0 5px;
     }
 }
+
+.button{
+        background-color: black; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+           
+}
+
+.button1 {font-size: 15px;}
